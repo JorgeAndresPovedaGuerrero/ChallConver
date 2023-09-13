@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 
 public class ConversorAppUI extends Application {
 
+
     private Conversor conversor;
 
     public ConversorAppUI() {
@@ -25,19 +26,25 @@ public class ConversorAppUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Conversor");
 
+
+        primaryStage.setTitle("Conversor");
+        String css = getClass().getResource("/styles/style.css").toExternalForm();
         conversor = new Conversor();
 
         Label titleLabel = new Label("Conversor");
+        titleLabel.getStyleClass().add("title-label");
         titleLabel.setStyle("-fx-font-size: 20px;");
         titleLabel.setAlignment(javafx.geometry.Pos.CENTER);
 
         ToggleGroup conversionType = new ToggleGroup();
         RadioButton monedasButton = new RadioButton("Monedas");
         monedasButton.setToggleGroup(conversionType);
+        monedasButton.getStyleClass().add("radio-button");
         RadioButton temperaturaButton = new RadioButton("Temperatura");
+        temperaturaButton.getStyleClass().add("radio-button");
         temperaturaButton.setToggleGroup(conversionType);
+
 
         ComboBox<String> listaOrigen = new ComboBox<>();
         ComboBox<String> listaDestino = new ComboBox<>();
@@ -102,6 +109,7 @@ public class ConversorAppUI extends Application {
 
         // Botón Convertir
         Button convertirButton = new Button("Convertir");
+        convertirButton.getStyleClass().add("styled-button");
         convertirButton.setOnAction(event -> {
             String tipoConversion = monedasButton.isSelected() ? "Monedas" : "Temperatura";
             String unidadOrigen = listaOrigen.getValue();
@@ -141,6 +149,7 @@ public class ConversorAppUI extends Application {
         );
 
         Scene scene = new Scene(vbox, 400, 400);
+        scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
